@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Simple Node.js To-Do List App
 
 This is a short and simple To-Do List web app built with React + Vite (runs on Node.js tooling).
@@ -91,3 +92,7 @@ sudo systemctl restart nginx
 
 - If you use a custom domain, point DNS to your EC2 public IP.
 - For HTTPS, you can use Certbot with Nginx.
+=======
+# manish-devops
+my first app
+>>>>>>> 985fc72efa6c04841851883a6eb5009dd04dee1a
