@@ -1,0 +1,229 @@
+=============================================================
+LINE-BY-LINE EXPLANATION OF THE README / GIT CONFLICT FILE
+=============================================================
+
+LINE: <<<<<<< HEAD
+EXPLANATION: Git merge conflict marker. Marks the start of content
+from your current local branch (HEAD). Content between this marker
+and ======= belongs to your current branch.
+
+-------------------------------------------------------------
+
+LINE: # Simple Node.js To-Do List App
+EXPLANATION: Markdown H1 heading. The main title of the project README.
+The '#' symbol makes it the largest heading level in Markdown.
+
+-------------------------------------------------------------
+
+LINE: This is a short and simple To-Do List web app built with React + Vite
+EXPLANATION: Plain text project description. Tells the reader this is a
+To-Do List app built using React (UI library) and Vite (fast build tool),
+running on Node.js tooling.
+
+-------------------------------------------------------------
+
+LINE: ## 1. Run locally
+EXPLANATION: Markdown H2 heading. Starts Section 1 covering how to run
+the app on a local/development machine.
+
+-------------------------------------------------------------
+
+LINES:
+  npm install
+  npm run dev
+
+EXPLANATION:
+  npm install    - Downloads and installs all project dependencies from package.json
+  npm run dev    - Starts the Vite development server (hot-reloading enabled)
+
+-------------------------------------------------------------
+
+LINE: Open http://localhost:5173
+EXPLANATION: After running npm run dev, open this URL in your browser.
+Port 5173 is Vite's default development port.
+
+-------------------------------------------------------------
+
+LINE: ## 2. Push to GitHub
+EXPLANATION: Section 2 heading. Instructions for uploading project code
+to a remote GitHub repository.
+
+-------------------------------------------------------------
+
+LINE: Create a new empty repository in GitHub, then run:
+EXPLANATION: Instruction to first create a blank repo on github.com
+before running the git commands.
+
+-------------------------------------------------------------
+
+LINES:
+  git init
+  git add .
+  git commit -m "Initial commit: todo app"
+  git branch -M main
+  git remote add origin https://github.com/<username>/<repo>.git
+  git push -u origin main
+
+EXPLANATION:
+  git init               - Initializes a new local Git repository
+  git add .              - Stages ALL files for the next commit
+  git commit -m "..."    - Creates a commit (snapshot) with a message
+  git branch -M main     - Renames current branch to 'main'
+  git remote add origin  - Links local repo to remote GitHub URL
+  git push -u origin main- Uploads commits to GitHub's main branch
+
+-------------------------------------------------------------
+
+LINE: ## 3. Deploy on EC2 (Ubuntu)
+EXPLANATION: Section 3 heading. Covers deploying the app to an AWS EC2
+virtual machine running Ubuntu Linux.
+
+-------------------------------------------------------------
+
+LINE: ### 3.1 Launch EC2
+EXPLANATION: Sub-section for creating and configuring an AWS EC2 instance.
+
+-------------------------------------------------------------
+
+LINES:
+  - Create Ubuntu EC2 instance.
+  - Allow ports: 22 (SSH), 80 (HTTP), 443 (HTTPS optional).
+  - Keep your .pem key file safe.
+
+EXPLANATION:
+  Ubuntu EC2 instance    - A virtual Linux server on AWS cloud
+  Port 22 (SSH)          - Allows remote terminal access
+  Port 80 (HTTP)         - Allows web browser traffic
+  Port 443 (HTTPS)       - Allows secure encrypted web traffic
+  .pem key file          - Private key for SSH authentication. Never share or lose it.
+
+-------------------------------------------------------------
+
+LINE: ### 3.2 Connect to EC2
+EXPLANATION: Sub-section for connecting to the server via SSH.
+
+-------------------------------------------------------------
+
+LINE: ssh -i /path/to/your-key.pem ubuntu@<EC2_PUBLIC_IP>
+EXPLANATION:
+  ssh                      - Secure Shell remote login command
+  -i /path/to/your-key.pem - Path to your private key file
+  ubuntu@                  - Default username for Ubuntu EC2 instances
+  <EC2_PUBLIC_IP>          - Your server's public IP from AWS console
+
+-------------------------------------------------------------
+
+LINE: ### 3.3 Install Node.js, Nginx, and Git
+EXPLANATION: Sub-section for installing required server software.
+
+-------------------------------------------------------------
+
+LINES:
+  sudo apt update
+  sudo apt install -y git nginx curl
+  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+  sudo apt install -y nodejs
+  node -v
+  npm -v
+
+EXPLANATION:
+  sudo apt update          - Refreshes Ubuntu's package list
+  apt install git nginx curl - Installs Git, Nginx web server, and curl tool
+  -y                       - Auto-answers YES to installation prompts
+  curl ... | sudo bash -   - Downloads and runs NodeSource setup script for Node.js 20
+  sudo apt install nodejs  - Installs Node.js version 20
+  node -v                  - Verifies Node.js is installed (prints version)
+  npm -v                   - Verifies npm is installed (prints version)
+
+-------------------------------------------------------------
+
+LINE: ### 3.4 Clone and build app
+EXPLANATION: Sub-section for downloading code from GitHub and building it.
+
+-------------------------------------------------------------
+
+LINES:
+  git clone https://github.com/<username>/<repo>.git
+  cd <your-repo>
+  npm install
+  npm run build
+
+EXPLANATION:
+  git clone ...    - Downloads the GitHub repository to the EC2 server
+  cd <your-repo>   - Changes directory into the cloned project folder
+  npm install      - Installs all project dependencies on the server
+  npm run build    - Compiles/bundles React+Vite app into production-ready dist/ folder
+
+-------------------------------------------------------------
+
+LINE: ### 3.5 Serve build with Nginx
+EXPLANATION: Sub-section for configuring Nginx to serve the app publicly.
+
+-------------------------------------------------------------
+
+LINES:
+  sudo rm -rf /var/www/html/*
+  sudo cp -r dist/* /var/www/html/
+  sudo systemctl restart nginx
+  sudo systemctl enable nginx
+
+EXPLANATION:
+  rm -rf /var/www/html/*   - Deletes Nginx's default welcome page
+  cp -r dist/* /var/www/html/ - Copies built app files to Nginx web root
+  systemctl restart nginx  - Restarts Nginx to apply changes
+  systemctl enable nginx   - Configures Nginx to auto-start on server reboot
+
+-------------------------------------------------------------
+
+LINE: http://<EC2_PUBLIC_IP>
+EXPLANATION: Visit this URL in any browser to see your live deployed app.
+Replace <EC2_PUBLIC_IP> with your actual server IP address.
+
+-------------------------------------------------------------
+
+LINE: ## 4. Update app after new GitHub push
+EXPLANATION: Section 4 heading. How to redeploy after making code changes.
+
+-------------------------------------------------------------
+
+LINES:
+  cd <your-repo>
+  git pull origin main
+  npm install
+  npm run build
+  sudo rm -rf /var/www/html/*
+  sudo cp -r dist/* /var/www/html/
+  sudo systemctl restart nginx
+
+EXPLANATION:
+  cd <your-repo>           - Navigate to project folder on EC2
+  git pull origin main     - Downloads latest code changes from GitHub
+  npm install              - Installs any newly added dependencies
+  npm run build            - Rebuilds the production bundle
+  rm -rf /var/www/html/*   - Clears old build files
+  cp -r dist/* /var/www/html/ - Copies new build files to Nginx
+  systemctl restart nginx  - Restarts Nginx to serve updated app
+
+-------------------------------------------------------------
+
+LINE: Notes section:
+  - If you use a custom domain, point DNS to your EC2 public IP.
+  - For HTTPS, you can use Certbot with Nginx.
+
+EXPLANATION:
+  Custom domain DNS        - In your domain registrar, create an A record
+                             pointing your domain to the EC2 public IP address
+  Certbot with Nginx       - Free tool to install SSL/TLS certificates from
+                             Let's Encrypt for HTTPS security
+
+-------------------------------------------------------------
+
+LINE: =======
+EXPLANATION: Git merge conflict separator. Marks the end of the HEAD
+(current branch) content and beginning of the incoming branch content.
+The incoming branch section appears empty here, meaning that branch
+had no content in this area.
+
+=============================================================
+END OF EXPLANATION
+=============================================================
