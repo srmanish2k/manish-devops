@@ -38,8 +38,8 @@ export default function App() {
     <main className="min-h-screen bg-slate-950 px-4 py-12 text-slate-100">
       <section className="mx-auto w-full max-w-xl space-y-6">
         <header className="space-y-2">
-          <p className="text-sm text-slate-400">Node.js Todo App</p>
-          <h1 className="text-4xl font-semibold tracking-tight">Simple To-Do List</h1>
+          <p className="text-sm text-slate-400">Punjabi aa gye Oyee !</p>
+          <h1 className="text-4xl font-semibold tracking-tight">Manish DevOps To-Do List</h1>
           <p className="text-slate-300">Add your tasks, mark them done, and remove what you finish.</p>
         </header>
 
